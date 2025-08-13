@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flappy Croco</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Yandex Games SDK -->
+    <script>
+        function initSDK() {
+            console.log('SDK loaded and initialized');
+            // The SDK initialization will be handled by yandex-sdk.js
+        }
+        
+        (function(d) {
+            var s = d.createElement('script');
+            s.src = '/sdk.js';
+            s.async = true;
+            s.onload = initSDK;
+            d.body.append(s);
+        })(document);
+    </script>
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- Game UI Overlay -->
+        <div id="gameUI">
+            <!-- Main Menu -->
+            <div id="menuScreen" class="screen active">
+                <div class="menu-content">
+                    <h1 class="game-title">Flappy Croco</h1>
+                    <button id="startBtn" class="game-btn">Start Game</button>
+                    <button id="soundBtn" class="game-btn sound-btn">🔊 Sound ON</button>
+                    <button id="musicBtn" class="game-btn music-btn">🎵 Music ON</button>
+                    <div class="high-score">Best: <span id="highScore">0</span></div>
+                </div>
+            </div>
+            
+            <!-- Game HUD -->
+            <div id="gameHUD" class="screen">
+                <div class="score">Score: <span id="currentScore">0</span></div>
+                <div class="instructions">
+                    <div class="desktop-hint">Press SPACE or click to jump</div>
+                    <div class="mobile-hint">Tap to jump</div>
+                </div>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="screen">
+                <div class="game-over-content">
+                    <h2>Game Over!</h2>
+                    <div class="final-score">Score: <span id="finalScore">0</span></div>
+                    <div class="best-score">Best: <span id="bestScore">0</span></div>
+                    <button id="restartBtn" class="game-btn">Play Again</button>
+                    <button id="menuBtn" class="game-btn">Main Menu</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel">
+            <button id="settingsToggle" class="settings-toggle">⚙️</button>
+            <div id="settingsContent" class="settings-content">
+                <h3>Game Settings</h3>
+                
+                <div class="setting-group">
+                    <label>Bird Size:</label>
+                    <input type="range" id="birdSize" min="0.5" max="2" step="0.1" value="1">
+                    <span id="birdSizeValue">1.0</span>
+                </div>
+                
+                <div class="setting-group">
+                    <label>Pipe Size:</label>
+                    <input type="range" id="pipeSize" min="0.5" max="2" step="0.1" value="1">
+                    <span id="pipeSizeValue">1.0</span>
+                </div>
+                
+                <div class="setting-group">
+                    <label>Bird Collision Width:</label>
+                    <input type="range" id="birdCollisionWidth" min="0.3" max="1" step="0.1" value="0.5">
+                    <span id="birdCollisionWidthValue">0.5</span>
+                </div>
+                
+                <div class="setting-group">
+                    <label>Bird Collision Height:</label>
+                    <input type="range" id="birdCollisionHeight" min="0.3" max="1" step="0.1" value="0.5">
+                    <span id="birdCollisionHeightValue">0.5</span>
+                </div>
+                
+                <div class="setting-group">
+                    <label>Pipe Collision Width:</label>
+                    <input type="range" id="pipeCollisionWidth" min="0.3" max="1.2" step="0.1" value="0.7">
+                    <span id="pipeCollisionWidthValue">0.7</span>
+                </div>
+                
+                <div class="setting-group">
+                    <label>Pipe Collision Height:</label>
+                    <input type="range" id="pipeCollisionHeight" min="0.8" max="1.2" step="0.1" value="1.0">
+                    <span id="pipeCollisionHeightValue">1.0</span>
+                </div>
+                
+                <div class="setting-group">
+                    <label>Game Speed:</label>
+                    <input type="range" id="gameSpeed" min="0.5" max="3" step="0.1" value="1">
+                    <span id="gameSpeedValue">1.0</span>
+                </div>
+                
+                <div class="setting-group">
+                    <label>Pipe Gap:</label>
+                    <input type="range" id="pipeGap" min="150" max="350" step="25" value="250">
+                    <span id="pipeGapValue">250</span>
+                </div>
+                
+                <button id="resetSettings" class="game-btn small">Reset to Default</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="attached_assets/background music_1754949347680.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-content">
+            <h2>Loading...</h2>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="yandex-sdk.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
